@@ -1,23 +1,23 @@
 /* eslint-disable */
 // jshint ignore: start
-import React from 'react'
-import Contact from './contact'
-import Copyright from './copyright'
-import BurgerButton from './burger'
-import Header from './header'
-import '../styles/main.scss'
-import Sidebar from './sidebar'
-import { StaticQuery, graphql } from 'gatsby'
+import React from "react"
+import Contact from "./contact"
+import Copyright from "./copyright"
+import BurgerButton from "./burger"
+import Header from "./header"
+import "../styles/main.scss"
+import Sidebar from "./sidebar"
+import { StaticQuery, graphql } from "gatsby"
 
 class Template extends React.Component {
-  state = { showMenu: false, menuAlt: false}
+  state = { showMenu: false, menuAlt: false }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener("scroll", this.handleScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener("scroll", this.handleScroll)
   }
 
   handleScroll = e => {
@@ -48,17 +48,25 @@ class Template extends React.Component {
     return (
       <div
         id="layout"
-        className={this.state.showMenu ? 'is-navPanel-visible' : ''}
+        className={this.state.showMenu ? "is-navPanel-visible" : ""}
       >
         <div id="wrapper">
           <Header location={location} siteMetadata={data.site.siteMetadata} />
           <div id="main">{children}</div>
           <Contact contact={contact} social={social} />
           <Copyright title={title} />
-          <div className="bg fixed" style={{ transform: 'none' }} />
+          <div className="bg fixed" style={{ transform: "none" }} />
         </div>
-        <Sidebar menuLinks={menuLinks} toggleMenu={this.toggleMenu} social={social} />
-        <a id="navPanelToggle" onClick={this.toggleMenu} className={this.state.menuAlt ? 'alt' : ''}>
+        <Sidebar
+          menuLinks={menuLinks}
+          toggleMenu={this.toggleMenu}
+          social={social}
+        />
+        <a
+          id="navPanelToggle"
+          onClick={this.toggleMenu}
+          className={this.state.menuAlt ? "alt" : ""}
+        >
           <BurgerButton />
         </a>
       </div>
@@ -66,39 +74,39 @@ class Template extends React.Component {
   }
 }
 
-const Layout = (props) => {
+const Layout = props => {
   console.log(props)
   return (
     <StaticQuery
-    query={graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            social {
-              twitter
-              facebook
-              snapchat
-              instagram
-              medium
+      query={graphql`
+        query {
+          site {
+            siteMetadata {
+              title
+              description
+              social {
+                linkedIn
+                github
+                twitter
+                medium
+                tumblr
+              }
+              menuLinks {
+                name
+                link
+              }
+              contact {
+                info
+                email
+                tel
+                address
+              }
             }
-            menuLinks {
-              name
-              link
-            }
-            contact {
-              info
-              email
-              tel
-              address
-            }
-          }    
+          }
         }
-      }
-    `}
-    render={data => <Template data={data} {...props} />}
-  />
+      `}
+      render={data => <Template data={data} {...props} />}
+    />
   )
 }
 
