@@ -14,7 +14,7 @@ To use this theme in your Gatsby sites, check [this example](https://github.com/
     ```sh
     npm i gatsby-theme-massively
     ```
-    
+
 2. Install dependencies
 
     ```
@@ -88,11 +88,11 @@ export const pageQuery = graphql`
         author
         description
         social {
+          linkedIn
+          github
           twitter
-          facebook
-          snapchat
-          instagram
           medium
+          tumblr
         }
         menuLinks {
           name
